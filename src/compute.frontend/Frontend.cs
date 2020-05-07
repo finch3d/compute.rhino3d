@@ -59,8 +59,8 @@ namespace compute.frontend
         {
             var config = new HostConfiguration();
 #if DEBUG
-            config.RewriteLocalhost = false;  // Don't require URL registration for localhost when debugging
-            if (Env.GetEnvironmentBool("COMPUTE_SPAWN_GEOMETRY_SERVER", false))  // False by default in debug so we can run both services in the debugger
+            //config.RewriteLocalhost = false;  // Don't require URL registration for localhost when debugging
+            if (Env.GetEnvironmentBool("COMPUTE_SPAWN_GEOMETRY_SERVER", true))  // False by default in debug so we can run both services in the debugger
                 SpawnBackendProcess();
 #else
             if (Env.GetEnvironmentBool("COMPUTE_SPAWN_GEOMETRY_SERVER", true))
@@ -146,6 +146,8 @@ namespace compute.frontend
         protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
         {
             Log.Debug("ApplicationStartup");
+
+            Nancy.StaticConfiguration.DisableErrorTraces = false;
 
             pipelines.EnableGzipCompression(new GzipCompressionSettings() { MinimumBytes = 1024 });
 

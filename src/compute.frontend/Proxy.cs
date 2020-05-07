@@ -83,8 +83,8 @@ namespace compute.frontend
             var client = new HttpClient(handler);
             foreach (var header in Context.Request.Headers)
             {
-                //Log.Debug("{key}: {value}", header.Key, header.Value);
-                if (_skipHeaders.Contains(header.Key)) // host header causes 400 invalid host error
+                Log.Debug("{key}: {value}", header.Key, header.Value);
+                if (_skipHeaders.Contains(header.Key, StringComparer.OrdinalIgnoreCase)) // host header causes 400 invalid host error
                     continue;
                 client.DefaultRequestHeaders.Add(header.Key, header.Value);
             }
