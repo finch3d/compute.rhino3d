@@ -15,3 +15,6 @@ venv
 rhino_*.exe
 settings-Scheme__Default.xml
 cloudzoo.json
+
+# macos
+.DS_Store
